@@ -2,8 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Include native libraries for different RIDs -->
+    <None Update="runtimes/**/native/*.dll">
+      <Pack>true</Pack>
+      <PackagePath>runtimes/%(RID)/native/</PackagePath>
+    </None>
+    <None Update="runtimes/**/native/*.so">
+      <Pack>true</Pack>
+      <PackagePath>runtimes/%(RID)/native/</PackagePath>
+    </None>
+    <None Update="runtimes/**/native/*.dylib">
+      <Pack>true</Pack>
+      <PackagePath>runtimes/%(RID)/native/</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
