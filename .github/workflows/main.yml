@@ -84,7 +84,7 @@ jobs:
             if [[ ${{ startsWith(matrix.rid, 'win-') }} == true ]]; then
               mv runtimes/${{ matrix.rid}}/native/bin/portaudio.dll runtimes/${{ matrix.rid}}/native/
               rm -rf runtimes/${{ matrix.rid}}/native/bin
-            elif [[ ${{ startsWith(matrix.rid, 'linux-') }} == true  ]]; then
+            elif [[ ${{ startsWith(matrix.rid, 'linux-') }} == true ]]; then
               mv runtimes/${{ matrix.rid}}/native/lib/libportaudio.so runtimes/${{ matrix.rid}}/native/
               rm -rf runtimes/${{ matrix.rid}}/native/lib
             elif [[  ${{ startsWith(matrix.rid, 'osx-') }} == true ]]; then
