@@ -1,5 +1,3 @@
-name: Publish to NuGet
-
 on:
   push:
     branches:
