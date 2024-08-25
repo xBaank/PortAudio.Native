@@ -92,8 +92,6 @@ jobs:
               rm -rf runtimes/${{ matrix.rid}}/native/lib
             fi
   
-            rm runtimes/${{ matrix.rid}}/native/library.zip
-  
       - name: Upload native libraries as artifact
         uses: actions/upload-artifact@v3
         with:
