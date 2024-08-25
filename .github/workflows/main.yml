@@ -114,7 +114,6 @@ jobs:
 
       - name: Extract native libraries
         run: |
-          ll
           mkdir -p runtimes/
           # Extract all files from the artifact to the runtimes directory
           unzip -o native-libs/native-libs.zip -d runtimes/
