@@ -81,13 +81,13 @@ jobs:
             unzip -o runtimes/${{ matrix.rid}}/native/library.zip -d runtimes/${{ matrix.rid}}/native/
             rm runtimes/${{ matrix.rid}}/native/library.zip
             
-            if [[ ${{ fromJson(startsWith(matrix.rid, 'win-')) }} ]]; then
+            if [[ ${{ startsWith(matrix.rid, 'win-') }} == true ]]; then
               mv runtimes/${{ matrix.rid}}/native/bin/portaudio.dll runtimes/${{ matrix.rid}}/native/
               rm -rf runtimes/${{ matrix.rid}}/native/bin
-            elif [[ ${{ fromJson(startsWith(matrix.rid, 'linux-')) }}  ]]; then
+            elif [[ ${{ startsWith(matrix.rid, 'linux-') }} == true  ]]; then
               mv runtimes/${{ matrix.rid}}/native/lib/libportaudio.so runtimes/${{ matrix.rid}}/native/
               rm -rf runtimes/${{ matrix.rid}}/native/lib
-            elif [[  ${{ fromJson(startsWith(matrix.rid, 'osx-')) }}  ]]; then
+            elif [[  ${{ startsWith(matrix.rid, 'osx-') }} == true ]]; then
               mv runtimes/${{ matrix.rid}}/native/lib/libportaudio.dylib runtimes/${{ matrix.rid}}/native/
               rm -rf runtimes/${{ matrix.rid}}/native/lib
             fi
