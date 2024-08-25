@@ -94,10 +94,11 @@ jobs:
             fi
   
       - name: Upload native libraries as artifact
-        uses: actions/upload-artifact@v3 #Update this in the future
+        uses: actions/upload-artifact@v4
         with:
           name: native-libs
           path: runtimes/
+          overwrite: true
 
   build-and-publish:
     runs-on: ubuntu-latest
