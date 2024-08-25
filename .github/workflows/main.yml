@@ -112,6 +112,13 @@ jobs:
         with:
           name: native-libs
 
+      - name: Extract native libraries
+        run: |
+          ll
+          mkdir -p runtimes/
+          # Extract all files from the artifact to the runtimes directory
+          unzip -o native-libs/native-libs.zip -d runtimes/
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v3
         with:
