@@ -30,6 +30,7 @@ jobs:
         run: |
           PACKAGE_VERSION=${{ steps.get-version.outputs.version }}
           EXISTS=$(dotnet nuget search "YourPackageName" --source https://api.nuget.org/v3/index.json --take 1 | grep -q "$PACKAGE_VERSION" && echo "true" || echo "false")
+          echo "Already exists nuget package: $EXISTS"
           echo "::set-output name=exists::$EXISTS"
 
   download-native-libraries:
