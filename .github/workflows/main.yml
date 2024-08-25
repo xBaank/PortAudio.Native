@@ -108,7 +108,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download native libraries artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: native-libs
           path: runtimes/ 
