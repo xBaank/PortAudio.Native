@@ -27,5 +27,12 @@
     <None Include="runtimes/osx-arm64/native/libportaudio.dylib" Pack="true" PackagePath="runtimes/osx-arm64/native/" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <Authors>$(Company)</Authors>
+    <Description>Package with native libraries of portaudio</Description>
+    <PackageProjectUrl>https://github.com/xBaank/PortAudio.Native</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
 
 </Project>
