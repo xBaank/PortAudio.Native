@@ -124,7 +124,6 @@ jobs:
 
       - name: Update package version
         run: |
-          dotnet-gitversion /updateassemblyinfo
           dotnet pack --configuration Release -o ./nupkg /p:PackageVersion=${{ needs.check-version.outputs.version }}
 
       - name: Upload NuGet package as artifact
