@@ -16,7 +16,7 @@ jobs:
       exists: ${{ steps.check-nuget.outputs.exists }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get latest GitHub release version
         id: get-version
@@ -50,10 +50,10 @@ jobs:
     if: needs.check-version.outputs.exists == 'false'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
     
@@ -94,7 +94,7 @@ jobs:
             fi
   
       - name: Upload native libraries as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: native-libs
           path: runtimes/
@@ -105,16 +105,16 @@ jobs:
     if: needs.check-version.outputs.exists == 'false'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download native libraries artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: native-libs
           path: runtimes/ 
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x' 
 
@@ -134,7 +134,7 @@ jobs:
           dotnet pack --configuration Release -o ./nupkg /p:PackageVersion=$PACKAGE_VERSION
 
       - name: Upload NuGet package as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
             name: nuget-package
             path: ./nupkg/*.nupkg
