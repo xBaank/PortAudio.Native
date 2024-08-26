@@ -16,6 +16,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install jq
+        run: sudo apt install jq -y
+
       - name: Get latest GitHub release version
         id: get-version
         run: |
@@ -23,13 +26,15 @@ jobs:
           echo "Latest release version: $LATEST_RELEASE"
           echo "version=$LATEST_RELEASE" >> $GITHUB_OUTPUT
       
-      - name: Determine if package exists
-        id: check-existence
+      - name: Check if version already exists on NuGet
+        id: check-nuget
         run: |
-          SEARCH_RESULT=${{ steps.get-version.outputs.search_result }}
           PACKAGE_VERSION=${{ steps.get-version.outputs.version }}
-          EXISTS=$([[ ${{ fromJson(env.SEARCH_RESULT).searchResult[0].packages[0].latestVersion }} == "$PACKAGE_VERSION" ]] && echo "true" || echo "false")
+          EXISTS=$(dotnet package search "PortAudio.Native" --source https://api.nuget.org/v3/index.json --format json --take 1 | \
+          jq -r --arg PACKAGE_VERSION "$PACKAGE_VERSION" '.searchResult[].packages[] | select(.latestVersion == $PACKAGE_VERSION) | if .id != null then "true" else "false" end')
+          echo "Already exists nuget package: $EXISTS"
           echo "exists=$EXISTS" >> $GITHUB_ENV
+
 
   download-native-libraries:
     needs: check-version
