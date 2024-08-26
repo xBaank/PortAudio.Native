@@ -23,12 +23,12 @@ jobs:
           echo "Latest release version: $LATEST_RELEASE"
           echo "version=$LATEST_RELEASE" >> $GITHUB_OUTPUT
       
-      - name: Check if version already exists on NuGet
-        id: check-nuget
+      - name: Determine if package exists
+        id: check-existence
         run: |
+          SEARCH_RESULT=${{ steps.get-version.outputs.search_result }}
           PACKAGE_VERSION=${{ steps.get-version.outputs.version }}
-          EXISTS=$(dotnet nuget search "YourPackageName" --source https://api.nuget.org/v3/index.json --take 1 | grep -q "$PACKAGE_VERSION" && echo "true" || echo "false")
-          echo "Already exists nuget package: $EXISTS"
+          EXISTS=$([[ ${{ fromJson(env.SEARCH_RESULT).searchResult[0].packages[0].latestVersion }} == "$PACKAGE_VERSION" ]] && echo "true" || echo "false")
           echo "exists=$EXISTS" >> $GITHUB_ENV
 
   download-native-libraries:
