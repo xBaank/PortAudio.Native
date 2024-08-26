@@ -2,9 +2,6 @@ on:
   push:
     branches:
       - dev
-  workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC
 
 jobs:
   check-version:
@@ -21,15 +18,7 @@ jobs:
         run: |
           LATEST_RELEASE=$(curl -s https://api.github.com/repos/xBaank/PortAudioBin/releases/latest | jq -r '.tag_name')
           echo "Latest release version: $LATEST_RELEASE"
-          echo "::set-output name=version::$LATEST_RELEASE"
-
-      - name: Check if version already exists on NuGet
-        id: check-nuget
-        run: |
-          PACKAGE_VERSION=${{ steps.get-version.outputs.version }}
-          EXISTS=$(dotnet nuget search "YourPackageName" --source https://api.nuget.org/v3/index.json --take 1 | grep -q "$PACKAGE_VERSION" && echo "true" || echo "false")
-          echo "Already exists nuget package: $EXISTS"
-          echo "::set-output name=exists::$EXISTS"
+          echo "version=$LATEST_RELEASE" >> $GITHUB_OUTPUT
 
   download-native-libraries:
     needs: check-version
