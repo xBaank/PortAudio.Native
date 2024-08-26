@@ -45,7 +45,7 @@ jobs:
           echo "Already exists nuget package: ${EXISTS:-false}"
           
           # Save the result to an environment variable
-          echo "exists=${EXISTS:-false}" >> $GITHUB_ENV
+          echo "exists=${EXISTS:-false}" >> $GITHUB_OUTPUT
 
 
 
