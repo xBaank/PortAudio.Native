@@ -148,7 +148,7 @@ jobs:
 
       - name: Update package version
         run: |
-          PACKAGE_VERSION="${{ needs.check-version.outputs.version }}-build${{ env.TIMESTAMP }}"
+          PACKAGE_VERSION="${{ needs.check-version.outputs.version }}+${{ env.TIMESTAMP }}"
           dotnet pack --configuration Release -o ./nupkg /p:PackageVersion=$PACKAGE_VERSION
 
       - name: Upload NuGet package as artifact
