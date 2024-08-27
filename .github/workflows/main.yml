@@ -33,7 +33,7 @@ jobs:
           echo "Searching for package version: $PACKAGE_VERSION"
           
           # Perform the package search and save the result
-          SEARCH_RESULT=$(dotnet package search "PortAudio.Native" --source https://api.nuget.org/v3/index.json --format json --take 1)
+          SEARCH_RESULT=$(dotnet package search "PortAudio.Native" --source https://api.nuget.org/v3/index.json --format json --take 1 --prerelease)
           
           # Print the JSON response for debugging
           echo "Search result: $SEARCH_RESULT"
